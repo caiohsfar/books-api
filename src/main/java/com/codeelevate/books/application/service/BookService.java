@@ -27,9 +27,9 @@ public class BookService {
         return books.map(bookDTOMapper::toDTO);
     }
 
-    public BookDTO getBookById(Long id) {
+    public BookDTO getBookById(Long id, String sessionId) {
 
-        return bookDTOMapper.toDTO(bookUseCases.getBookById(id));
+        return bookDTOMapper.toDTO(bookUseCases.getBookById(id, sessionId));
     }
 
 

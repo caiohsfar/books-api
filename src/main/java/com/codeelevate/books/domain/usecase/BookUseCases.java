@@ -25,9 +25,9 @@ public class BookUseCases {
     }
 
 
-    public Book getBookById(Long id) {
+    public Book getBookById(Long id, String sessionId) {
 
-        Book book = bookRepositoryProvider.getBookById(id);
+        Book book = bookRepositoryProvider.getBookById(id, sessionId);
 
         if (book == null) {
             throw new BookNotFoundException("Book not found with id " + id);

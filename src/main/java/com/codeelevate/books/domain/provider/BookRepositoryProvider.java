@@ -9,6 +9,6 @@ public interface BookRepositoryProvider {
 
     Page<Book> getAllBooks(Pageable pageable, String author, String genre, Boolean exactMatching, String sessionId);
 
-    Book getBookById(Long id);
+    Book getBookById(Long id, String sessionId);
 
 }

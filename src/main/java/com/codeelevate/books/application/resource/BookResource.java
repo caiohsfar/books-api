@@ -32,9 +32,9 @@ public class BookResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) {
+    public ResponseEntity<BookDTO> getBookById(@PathVariable Long id, @CookieValue("sessionId") String sessionId) {
 
-        return ResponseEntity.ok(bookService.getBookById(id));
+        return ResponseEntity.ok(bookService.getBookById(id, sessionId));
     }
 
     @GetMapping("/recently-viewed")

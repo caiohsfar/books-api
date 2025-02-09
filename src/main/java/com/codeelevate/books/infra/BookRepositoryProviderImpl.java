@@ -61,9 +61,14 @@ public class BookRepositoryProviderImpl implements BookRepositoryProvider {
 
     @Override
     @Cacheable(value = "book")
-    public Book getBookById(Long id) {
+    public Book getBookById(Long id, String sessionId) {
 
         BookEntity bookEntity = bookJPARepository.findById(id).orElse(null);
+
+        if (Strings.isNotEmpty(sessionId)) {
+            bookCachingProvider.addViewedBook(bookEntity, sessionId);
+        }
+
 
         return bookDomainMapper.toDomain(bookEntity);
     }
