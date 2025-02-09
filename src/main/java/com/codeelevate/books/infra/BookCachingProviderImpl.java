@@ -6,6 +6,7 @@ import com.codeelevate.books.infra.database.entity.BookEntity;
 import com.codeelevate.books.infra.mapper.BookDomainMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
@@ -13,11 +14,15 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 @Component
 @RequiredArgsConstructor
 public class BookCachingProviderImpl implements BookCachingProvider {
+
+    @Value("${spring.redis.ttlMinutes.recently}")
+    private int ttlRecently;
 
     private static final String CACHE_PREFIX = "recently:";
 
@@ -34,6 +39,8 @@ public class BookCachingProviderImpl implements BookCachingProvider {
         long timestamp = System.currentTimeMillis();
 
         zSetOps.add(key, book, timestamp);
+
+        redisTemplate.expire(key, ttlRecently, TimeUnit.MINUTES);
     }
 
     @Override

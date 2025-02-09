@@ -31,20 +31,7 @@ public class CacheConfig {
         JedisClientConfiguration clientConfig = JedisClientConfiguration.builder().build();
         return new JedisConnectionFactory(redisConfig, clientConfig);
     }
-
-//    @Bean
-//    public Jedis jedis(@Value("${spring.redis.host}") String host,
-//                                        @Value("${spring.redis.port}") int port) {
-//        return new Jedis(host, port);
-//    }
-
-
-//    @Bean
-//    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-//        RedisTemplate<String, Object> template = new RedisTemplate<>();
-//        template.setConnectionFactory(factory);
-//        return template;
-//    }
+    
 
     @Bean
     public RedisTemplate<String, Book> redisTemplate(RedisConnectionFactory connectionFactory) {
@@ -72,14 +59,12 @@ public class CacheConfig {
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory,
                                           @Value("${spring.redis.ttlMinutes.bookList}") int bookListTtl,
-                                          @Value("${spring.redis.ttlMinutes.book}") int bookTtl,
-                                          @Value("${spring.redis.ttlMinutes.recently}") int recentlyTtl) {
+                                          @Value("${spring.redis.ttlMinutes.book}") int bookTtl) {
 
 
         Map<String, RedisCacheConfiguration> cachesConfigs = Map.of(
                 "bookList", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(bookListTtl)),
-                "book", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(bookTtl)),
-                "recently", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(recentlyTtl))
+                "book", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(bookTtl))
         );
 
 
