@@ -1,5 +1,6 @@
 package com.codeelevate.books.infra.config;
 
+import com.codeelevate.books.domain.model.Book;
 import com.codeelevate.books.infra.database.entity.BookEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
@@ -46,11 +47,11 @@ public class CacheConfig {
 //    }
 
     @Bean
-    public RedisTemplate<String, BookEntity> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, BookEntity> template = new RedisTemplate<>();
+    public RedisTemplate<String, Book> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, Book> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new Jackson2JsonRedisSerializer<>(BookEntity.class));
+        template.setValueSerializer(new Jackson2JsonRedisSerializer<>(Book.class));
 
         template.afterPropertiesSet();
 

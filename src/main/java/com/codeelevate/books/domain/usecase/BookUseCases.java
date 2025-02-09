@@ -5,6 +5,7 @@ import com.codeelevate.books.domain.model.Book;
 import com.codeelevate.books.domain.provider.BookCachingProvider;
 import com.codeelevate.books.domain.provider.BookRepositoryProvider;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,14 @@ public class BookUseCases {
 
 
     public Page<Book> getAllBooks(Pageable pageable, String author, String genre, Boolean exactMatching, String sessionId) {
-        return bookRepositoryProvider.getAllBooks(pageable, author, genre, exactMatching, sessionId);
+
+        Page<Book> booksPageable = bookRepositoryProvider.getAllBooks(pageable, author, genre, exactMatching, sessionId);
+
+        if (Strings.isNotEmpty(sessionId)) {
+            booksPageable.getContent().forEach(book -> bookCachingProvider.addViewedBook(book, sessionId));
+        }
+
+        return booksPageable;
     }
 
 
@@ -33,10 +41,15 @@ public class BookUseCases {
             throw new BookNotFoundException("Book not found with id " + id);
         }
 
+        if (Strings.isNotEmpty(sessionId)) {
+            bookCachingProvider.addViewedBook(book, sessionId);
+        }
+
         return book;
     }
 
     public List<Book> getRecentlyViewed(int limit, String sessionId) {
+
         return bookCachingProvider.getRecentlyViewedBooks(limit, sessionId);
 
     }

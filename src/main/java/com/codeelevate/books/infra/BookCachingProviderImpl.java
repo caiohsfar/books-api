@@ -21,15 +21,15 @@ public class BookCachingProviderImpl implements BookCachingProvider {
 
     private static final String CACHE_PREFIX = "recently:";
 
-    private final RedisTemplate<String, BookEntity> redisTemplate;
+    private final RedisTemplate<String, Book> redisTemplate;
 
     private final BookDomainMapper mapper;
 
     @Override
-    public void addViewedBook(BookEntity book, String sessionId) {
+    public void addViewedBook(Book book, String sessionId) {
         String key = CACHE_PREFIX + sessionId;
 
-        ZSetOperations<String, BookEntity> zSetOps = redisTemplate.opsForZSet();
+        ZSetOperations<String, Book> zSetOps = redisTemplate.opsForZSet();
 
         long timestamp = System.currentTimeMillis();
 
@@ -46,11 +46,11 @@ public class BookCachingProviderImpl implements BookCachingProvider {
 
         String key = CACHE_PREFIX + sessionId;
 
-        Set<ZSetOperations.TypedTuple<BookEntity>> values = redisTemplate.opsForZSet()
+        Set<ZSetOperations.TypedTuple<Book>> values = redisTemplate.opsForZSet()
                 .reverseRangeWithScores(key, 0, limit - 1);
 
         if (values != null && !values.isEmpty()) {
-            values.forEach(bookTuple -> recentBooks.add(mapper.toDomain(bookTuple.getValue())));
+            values.forEach(bookTuple -> recentBooks.add(bookTuple.getValue()));
         }
 
         return recentBooks;

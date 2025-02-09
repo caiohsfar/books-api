@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BookCachingProvider {
 
-    void addViewedBook(BookEntity book, String sessionId);
+    void addViewedBook(Book book, String sessionId);
 
     List<Book> getRecentlyViewedBooks(int limit, String sessionId);
 

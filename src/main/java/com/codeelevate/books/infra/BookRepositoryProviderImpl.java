@@ -50,10 +50,6 @@ public class BookRepositoryProviderImpl implements BookRepositoryProvider {
 
         Page<BookEntity> booksPageable = bookJPARepository.findAll(Example.of(bookToSearch, matcher), pageable);
 
-        if (Strings.isNotEmpty(sessionId)) {
-            booksPageable.getContent().forEach(book -> bookCachingProvider.addViewedBook(book, sessionId));
-        }
-
         return booksPageable.map(bookDomainMapper::toDomain);
 
 
@@ -64,11 +60,6 @@ public class BookRepositoryProviderImpl implements BookRepositoryProvider {
     public Book getBookById(Long id, String sessionId) {
 
         BookEntity bookEntity = bookJPARepository.findById(id).orElse(null);
-
-        if (Strings.isNotEmpty(sessionId)) {
-            bookCachingProvider.addViewedBook(bookEntity, sessionId);
-        }
-
 
         return bookDomainMapper.toDomain(bookEntity);
     }
