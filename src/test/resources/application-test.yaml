@@ -1,0 +1,23 @@
+spring.datasource.url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.driverClassName: org.h2.Driver
+spring.datasource.username: sa
+spring.datasource.password: password
+spring.datasource.platform: h2
+spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto: create
+spring.jpa.show-sql: true
+spring.datasource.data: classpath:import.sql
+
+server.port: 8081
+
+spring:
+  cache:
+    enabled: false
+  flyway:
+    enabled: false
+    baseline-on-migrate: false
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    host: localhost
+    port: 6374

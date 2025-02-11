@@ -26,19 +26,19 @@ public class BookResource {
                                                      @RequestParam(defaultValue = "true") boolean exactMatching,
                                                      @RequestParam(required = false) String author,
                                                      @RequestParam(required = false) String mainGenre,
-                                                     @CookieValue("sessionId") String sessionId) {
+                                                     @CookieValue(required = false, value="sessionId") String sessionId) {
 
         return ResponseEntity.ok(bookService.getAllBooks(pageable, author, mainGenre, exactMatching, sessionId));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDTO> getBookById(@PathVariable Long id, @CookieValue("sessionId") String sessionId) {
+    public ResponseEntity<BookDTO> getBookById(@PathVariable Long id, @CookieValue(required = false, value="sessionId") String sessionId) {
 
         return ResponseEntity.ok(bookService.getBookById(id, sessionId));
     }
 
     @GetMapping("/recently-viewed")
-    public ResponseEntity<List<BookDTO>> getRecentlyViewed(@RequestParam(defaultValue = "10") int limit, @CookieValue("sessionId") String sessionId) {
+    public ResponseEntity<List<BookDTO>> getRecentlyViewed(@RequestParam(defaultValue = "10") int limit, @CookieValue( required = false, value="sessionId") String sessionId) {
 
         return ResponseEntity.ok(bookService.getRecentlyViewed(limit, sessionId));
     }
