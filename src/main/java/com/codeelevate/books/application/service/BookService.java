@@ -1,4 +1,4 @@
-package com.codeelevate.books.application;
+package com.codeelevate.books.application.service;
 
 import com.codeelevate.books.application.dto.BookDTO;
 import org.springframework.data.domain.Page;
