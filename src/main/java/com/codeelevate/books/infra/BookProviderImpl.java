@@ -1,7 +1,7 @@
 package com.codeelevate.books.infra;
 
 import com.codeelevate.books.domain.model.Book;
-import com.codeelevate.books.domain.provider.BookProvider;
+import com.codeelevate.books.domain.BookProvider;
 import com.codeelevate.books.infra.database.entity.BookEntity;
 import com.codeelevate.books.infra.database.repository.BookJPARepository;
 import com.codeelevate.books.infra.mapper.BookDomainMapper;

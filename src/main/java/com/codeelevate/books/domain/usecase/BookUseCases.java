@@ -2,7 +2,7 @@ package com.codeelevate.books.domain.usecase;
 
 import com.codeelevate.books.domain.exception.BookNotFoundException;
 import com.codeelevate.books.domain.model.Book;
-import com.codeelevate.books.domain.provider.BookProvider;
+import com.codeelevate.books.domain.BookProvider;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.domain.Page;

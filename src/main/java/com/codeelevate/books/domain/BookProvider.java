@@ -1,4 +1,4 @@
-package com.codeelevate.books.domain.provider;
+package com.codeelevate.books.domain;
 
 import com.codeelevate.books.domain.model.Book;
 import org.springframework.data.domain.Page;

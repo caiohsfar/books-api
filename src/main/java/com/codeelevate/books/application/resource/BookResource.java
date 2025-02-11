@@ -1,7 +1,7 @@
 package com.codeelevate.books.application.resource;
 
 import com.codeelevate.books.application.dto.BookDTO;
-import com.codeelevate.books.application.service.BookService;
+import com.codeelevate.books.application.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
