@@ -1,5 +1,6 @@
 package com.codeelevate.books.application.service;
 
+import com.codeelevate.books.application.BookService;
 import com.codeelevate.books.application.dto.BookDTO;
 import com.codeelevate.books.application.mapper.BookDTOMapper;
 import com.codeelevate.books.domain.model.Book;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class BookService {
+public class BookServiceImpl implements BookService {
 
     private final BookDTOMapper bookDTOMapper;
 
