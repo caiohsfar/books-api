@@ -2,8 +2,7 @@ package com.codeelevate.books.domain.usecase;
 
 import com.codeelevate.books.domain.exception.BookNotFoundException;
 import com.codeelevate.books.domain.model.Book;
-import com.codeelevate.books.domain.provider.BookCachingProvider;
-import com.codeelevate.books.domain.provider.BookRepositoryProvider;
+import com.codeelevate.books.domain.provider.BookProvider;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.domain.Page;
@@ -17,16 +16,15 @@ import java.util.List;
 public class BookUseCases {
 
 
-    private final BookRepositoryProvider bookRepositoryProvider;
-    private final BookCachingProvider bookCachingProvider;
+    private final BookProvider bookProvider;
 
 
     public Page<Book> getAllBooks(Pageable pageable, String author, String genre, Boolean exactMatching, String sessionId) {
 
-        Page<Book> booksPageable = bookRepositoryProvider.getAllBooks(pageable, author, genre, exactMatching, sessionId);
+        Page<Book> booksPageable = bookProvider.getAllBooks(pageable, author, genre, exactMatching, sessionId);
 
         if (Strings.isNotEmpty(sessionId)) {
-            booksPageable.getContent().forEach(book -> bookCachingProvider.addViewedBook(book, sessionId));
+            booksPageable.getContent().forEach(book -> bookProvider.addViewedBook(book, sessionId));
         }
 
         return booksPageable;
@@ -35,14 +33,14 @@ public class BookUseCases {
 
     public Book getBookById(Long id, String sessionId) {
 
-        Book book = bookRepositoryProvider.getBookById(id, sessionId);
+        Book book = bookProvider.getBookById(id, sessionId);
 
         if (book == null) {
             throw new BookNotFoundException("Book not found with id " + id);
         }
 
         if (Strings.isNotEmpty(sessionId)) {
-            bookCachingProvider.addViewedBook(book, sessionId);
+            bookProvider.addViewedBook(book, sessionId);
         }
 
         return book;
@@ -50,7 +48,7 @@ public class BookUseCases {
 
     public List<Book> getRecentlyViewed(int limit, String sessionId) {
 
-        return bookCachingProvider.getRecentlyViewedBooks(limit, sessionId);
+        return bookProvider.getRecentlyViewedBooks(limit, sessionId);
 
     }
 
