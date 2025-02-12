@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.codeelevate</groupId>
     <artifactId>books-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>books api</name>
     <description>Books API</description>
     <properties>
