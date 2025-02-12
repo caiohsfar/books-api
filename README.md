@@ -71,7 +71,6 @@ Esta API fornece informações sobre livros, permitindo a recuperação de uma l
    - `Criação de indexes`: Através do arquivo V4__create_index.sql, são criados índices para melhorar a performance das consultas.
 
 3. **Construção da API**:
-   - `db.migration`: A pasta /resources/db/migration contém os scripts SQL para criação da tabela `book`.
    - `Listagem por filtros`: Na classe com.codeelevate.books.infra.BookProviderImpl foi realizada a implementação da pesquisa por filtros utilizando a API Example do Spring Data JPA. Com ela também foi possível configurar para que a busca seja exata ou parcial e também Case Insensitive através a classe ExampleMatcher. 
    - `Spring Cache Redis`: Implementação do caching utilizando o Redis e o Spring Cache que permite a utilização da anotação @Cacheable. Esta é uma forma de definir que o resultado de um método deve ser armazenado em cache.
    - `RedisTemplate e ZSetOperations`: Na classe com.codeelevate.books.infra.BookProviderImpl foi utilizado o RedisTemplate para armazenar e recuperar os livros visualizados recentemente. Através da interface ZSetOperations foi possível armazenar os livros em um Set (conjunto) que é ordenado pelo timestamp. Assim é possível recuperar os livros ordenados por ordem de visualização.
