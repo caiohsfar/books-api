@@ -93,7 +93,8 @@ O projeto pode ser melhorado com a implementação de novas funcionalidades. Alg
 #### Configuração e Build
 1. Clone ou baixe o [repositório](https://github.com/caiohsfar/books-api):
    ```bash
-   git clone https://github.com/caiohsfar/books-api.git && cd books-api
+   git clone https://github.com/caiohsfar/books-api.git
+   cd books-api
    ```
 2. Renomeie o arquivo `.env-example` para `.env` que está na raiz da aplicação. Este arquivo contém as conexões. Você pode utilizar as configurações padrão que está no arquivo.
    ```bash
