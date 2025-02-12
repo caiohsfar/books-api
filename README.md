@@ -68,7 +68,7 @@ Esta API fornece informações sobre livros, permitindo a recuperação de uma l
 2. **Carregar base de dados**: Foi utilizado o Flyway para carregar o dataset books.csv no banco de dados.
    - `db.migration`: A pasta /resources/db/migration contém os scripts SQL para criação da tabela `book`.
    - `books.csv`: O dataset books.csv, encontrado em resources/static, é importado pelo Flyway através do script resources/db/migration/V3__insert.sql que executa antes da aplicação.
-   - `Criação de indexes`: Através do arquivo V4__create_index.sql, são criados índices para melhorar a performance das consultas.
+   - `Criação de indexes`: Através do arquivo V4__index.sql, são criados índices para melhorar a performance das consultas.
 
 3. **Construção da API**:
    - `Listagem por filtros`: Na classe com.codeelevate.books.infra.BookProviderImpl foi realizada a implementação da pesquisa por filtros utilizando a API Example do Spring Data JPA. Com ela também foi possível configurar para que a busca seja exata ou parcial e também Case Insensitive através a classe ExampleMatcher. 
