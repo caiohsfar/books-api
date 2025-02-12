@@ -101,7 +101,7 @@ O projeto pode ser melhorado com a implementação de novas funcionalidades. Alg
    ```
 3. Execute o Docker Compose para iniciar a aplicação:
    ```bash
-   docker compose up --build
+   docker compose up
    ```
 4. Acesse a documentação da API no [SwaggerUI](http://localhost:8080/swagger-ui.html)
 
