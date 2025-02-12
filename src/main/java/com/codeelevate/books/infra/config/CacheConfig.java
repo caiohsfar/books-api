@@ -57,18 +57,6 @@ public class CacheConfig {
     }
 
     /**
-     * Configures the Redis cache configuration.
-     *
-     * @return the Redis cache configuration
-     */
-    @Bean
-    public RedisCacheConfiguration cacheConfiguration() {
-        return RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(1))
-                .disableCachingNullValues();
-    }
-
-    /**
      * Configures the Redis cache manager.
      *
      * @param connectionFactory the Redis connection factory
