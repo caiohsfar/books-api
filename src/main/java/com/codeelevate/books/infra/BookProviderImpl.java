@@ -25,6 +25,9 @@ import java.util.concurrent.TimeUnit;
 
 import static org.springframework.data.domain.ExampleMatcher.matching;
 
+/**
+ * Implementation of the BookProvider interface.
+ */
 @Component
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "book")
@@ -80,6 +83,12 @@ public class BookProviderImpl implements BookProvider {
 
 
 
+    /**
+     * Adds a viewed book to the cache.
+     *
+     * @param book the book to add
+     * @param sessionId the session ID
+     */
     @Override
     public void addViewedBook(Book book, String sessionId) {
         String key = CACHE_PREFIX + sessionId;
@@ -93,6 +102,14 @@ public class BookProviderImpl implements BookProvider {
         bookRedisTemplate.expire(key, TTL_RECENTLY, TimeUnit.MINUTES);
     }
 
+
+    /**
+     * Retrieves recently viewed books from the cache.
+     *
+     * @param limit the maximum number of books to retrieve
+     * @param sessionId the session ID
+     * @return a list of recently viewed books
+     */
     @Override
     public List<Book> getRecentlyViewedBooks(int limit, String sessionId) {
         List<Book> recentBooks = new ArrayList<>();
