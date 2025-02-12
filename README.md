@@ -119,6 +119,7 @@ O projeto pode ser melhorado com a implementação de novas funcionalidades. Alg
 ![img_4.png](images/img_4.png)
 ![img_5.png](images/img_5.png)
 
+Obs.: passe o sessionId no header das chamadas para ativar o caching e pesquisar os livros recentemente visualizados.
 
 
 
