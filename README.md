@@ -3,13 +3,13 @@
 
 ### Descrição da Solução Implementada
 
-Esta API fornece informações sobre livros, permitindo a recuperação de uma lista paginada, detalhes de um livro específico e livros visualizados recentemente. A aplicação utiliza dados públicos do dataset [Kraggle - amazon-books-dataset](https://www.kaggle.com/datasets/chhavidhankhar11/amazon-books-dataset?resource=download). 
+Esta API fornece informações sobre livros, permitindo a recuperação de uma lista paginada, detalhes de um livro específico e livros visualizados recentemente. A aplicação utiliza dados públicos do dataset Books, encontrado em [Kraggle - amazon-books-dataset](https://www.kaggle.com/datasets/chhavidhankhar11/amazon-books-dataset?resource=download) que possui 7928 registros. 
 
 #### Funcionalidades da API
 
 1. **Obter Todos os Livros**:
    - Endpoint: `GET /books`
-   - Descrição: Permite a recuperação de uma lista paginada de livros. Suporta filtros opcionais por autor e gênero principal, além de permitir a configuração da ordenação e do tamanho da página.
+   - Descrição: Permite a recuperação de uma lista paginada de livros. Suporta filtros opcionais por autor e gênero principal, além de permitir ordenação dos dados.
    - Parâmetros:
       - `pageable`: Parâmetros de paginação e ordenação.
       - `exactMatching`: Booleano para definir se a busca deve ser exata ou parcial.
@@ -54,7 +54,8 @@ Esta API fornece informações sobre livros, permitindo a recuperação de uma l
    1. Paginação: A listagem de livros é paginada para melhorar a performance e reduzir o tempo de resposta.
    2. Filtros: Filtros opcionais por autor e gênero principal com a possibilidade de pesquisar por termos exatos ou parciais.
    3. Ordenação: A ordenação dos livros pode ser feita para que o consumidor possua mais controle sobre a pesquisa.
-8. **Caching**: Implementação de caching utilizando Redis para melhorar a performance da aplicação e possibilitar funcionalidades como "listar mais recentes", sem adicionar mais complexidade ao banco de dados.
+8. **Tratamento de Exceptions**: A classe com.codeelevate.books.application.advice.GlobalExceptionHandler é responsável por tratar as exceções levantadas e adicionar um código HTTP apropriado para a resposta.
+9. **Caching**: Implementação de caching utilizando Redis para melhorar a performance da aplicação e possibilitar funcionalidades como "listar mais recentes", sem adicionar mais complexidade ao banco de dados.
    1. **SessionId**: Utilização de um sessionId para identificar a sessão do usuário e permitir o caching dos livros visualizados recentemente.
    2. **Time to Live**: Configuração do tempo de vida do cache para 30 minutos, com o objetivo de reduzir a quantidade de dados armazenados e garantir a atualização dos livros visualizados recentemente.
 
@@ -87,21 +88,22 @@ O projeto pode ser melhorado com a implementação de novas funcionalidades. Alg
 ### Instalação e Execução
 
 #### Pré-requisitos
-- Docker
-- Git
+- [Docker](https://www.docker.com/)
 
 #### Configuração e Build
 1. Clone ou baixe o [repositório](https://github.com/caiohsfar/books-api):
    ```bash
    git clone https://github.com/caiohsfar/books-api.git && cd books-api
    ```
-1. Renomeie o arquivo `.env-example` para `.env` que está na raiz da aplicação. Este arquivo contém as conexões. Você pode utilizar as configurações padrão que está no arquivo.
-
+2. Renomeie o arquivo `.env-example` para `.env` que está na raiz da aplicação. Este arquivo contém as conexões. Você pode utilizar as configurações padrão que está no arquivo.
+   ```bash
+   mv .env-example .env
+   ```
 3. Execute o Docker Compose para iniciar a aplicação:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
-3. Acesse a documentação da API no [SwaggerUI](http://localhost:8080/swagger-ui.html)
+4. Acesse a documentação da API no [SwaggerUI](http://localhost:8080/swagger-ui.html)
 
 #### Execução dos Testes
 
